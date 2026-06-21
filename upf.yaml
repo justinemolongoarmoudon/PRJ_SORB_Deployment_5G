@@ -1,0 +1,36 @@
+# Configuration UPF — Open5GS UP
+# VM3 : 192.168.200.129
+# Transport des données utilisateur
+
+logger:
+  file:
+    path: /home/open5gs/open5gs-2.7.7/install/var/log/open5gs/upf.log
+
+global:
+  max:
+    ue: 1024
+
+upf:
+  # Interface N4 — reçoit les instructions PFCP du SMF (UDP 8805)
+  pfcp:
+    server:
+      - address: 192.168.200.129
+
+  # Interface N3 — reçoit le trafic GTP-U du gNB (UDP 2152)
+  gtpu:
+    server:
+      - address: 192.168.200.129
+
+  # Réseau des UE — doit correspondre à smf.yaml
+  # L'interface ogstun doit être configurée avec 10.45.0.1/16
+  session:
+    - subnet: 10.45.0.0/16
+      gateway: 10.45.0.1
+      dnn: internet
+    - subnet: 2001:db8:cafe::/48
+      gateway: 2001:db8:cafe::1
+
+  metrics:
+    server:
+      - address: 127.0.0.7
+        port: 9090
