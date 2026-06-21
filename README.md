@@ -115,9 +115,9 @@ Adresse attribuée au UE : 10.45.0.3
 
 Consulter les guides détaillés dans le dossier (docs/) :
 
-1. [Installation UERANSIM](docs/installation-ueransim.md)
-2. [Installation Open5GS CP](docs/installation-open5gs-cp.md)
-3. [Installation Open5GS UPF](docs/installation-open5gs-upf.md)
+1. [Installation UERANSIM](/commit/docs/installation-ueransim.md)
+2. [Installation Open5GS CP](/commit/docs/installation-open5gs-cp.md)
+3. [Installation Open5GS UPF](/commit/docs/installation-open5gs-upf.md)
 
 ### Ordre de démarrage
 
