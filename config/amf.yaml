@@ -1,0 +1,64 @@
+# Configuration AMF — Open5GS CP
+# VM2 : 192.168.200.128
+# Gestion de l'enregistrement UE, mobilité, signalisation NAS
+
+logger:
+  file:
+    path: /home/open5gscp/open5gs-2.7.7/install/var/log/open5gs/amf.log
+
+global:
+  max:
+    ue: 1024
+
+amf:
+  sbi:
+    server:
+      - address: 192.168.200.128
+        port: 7779
+    client:
+      # Utiliser le NRF directement (pas de SCP)
+      nrf:
+        - uri: http://127.0.0.10:7777
+
+  # Interface N2 — connexion du gNB
+  ngap:
+    server:
+      - address: 192.168.200.128   # Port SCTP 38412 (défaut)
+
+  metrics:
+    server:
+      - address: 192.168.200.128
+        port: 9090
+
+  # Identité du réseau mobile simulé
+  guami:
+    - plmn_id:
+        mcc: 999
+        mnc: 70
+      amf_id:
+        region: 2
+        set: 1
+
+  tai:
+    - plmn_id:
+        mcc: 999
+        mnc: 70
+      tac: 1
+
+  # Slices autorisés
+  plmn_support:
+    - plmn_id:
+        mcc: 999
+        mnc: 70
+      s_nssai:
+        - sst: 1   # Ne pas ajouter de SD si absent dans UERANSIM
+
+  security:
+    integrity_order: [ NIA2, NIA1, NIA0 ]
+    ciphering_order: [ NEA0, NEA1, NEA2 ]
+
+  network_name:
+    full: Open5GS
+    short: O5GS
+
+  amf_name: open5gs-amf0

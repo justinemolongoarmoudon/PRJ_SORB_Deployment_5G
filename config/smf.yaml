@@ -1,0 +1,61 @@
+# Configuration SMF — Open5GS CP
+# VM2 : 192.168.200.128
+# Gestion des sessions PDU + programmation de l'UPF via PFCP (N4)
+
+logger:
+  file:
+    path: /home/open5gscp/open5gs-2.7.7/install/var/log/open5gs/smf.log
+
+global:
+  max:
+    ue: 1024
+
+smf:
+  sbi:
+    server:
+      - address: 192.168.200.128
+        port: 7777
+    client:
+      nrf:
+        - uri: http://127.0.0.10:7777
+
+  # Interface N4 — communication PFCP avec l'UPF
+  pfcp:
+    server:
+      - address: 192.168.200.128   # Le SMF écoute sur cette adresse
+    client:
+      upf:
+        - address: 192.168.200.129  # Adresse de l'UPF (VM3)
+        # Port PFCP UDP 8805 (défaut)
+
+  gtpc:
+    server:
+      - address: 192.168.200.128
+
+  gtpu:
+    server:
+      - address: 192.168.200.128
+
+  metrics:
+    server:
+      - address: 192.168.200.128
+        port: 9090
+
+  # Réseau attribué aux UE
+  # La passerelle correspond à l'interface ogstun de l'UPF
+  session:
+    - subnet: 10.45.0.0/16
+      gateway: 10.45.0.1
+      dnn: internet
+    - subnet: 2001:db8:cafe::/48
+      gateway: 2001:db8:cafe::1
+
+  dns:
+    - 8.8.8.8
+    - 8.8.4.4
+    - 2001:4860:4860::8888
+    - 2001:4860:4860::8844
+
+  mtu: 1400
+
+  freeDiameter: /home/open5gscp/open5gs-2.7.7/install/etc/freeDiameter/smf.conf

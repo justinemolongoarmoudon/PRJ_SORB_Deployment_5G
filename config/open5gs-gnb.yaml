@@ -1,0 +1,25 @@
+# Configuration gNB — UERANSIM
+# VM1 : 192.168.200.130
+
+mcc: '999'   # Mobile Country Code
+mnc: '70'    # Mobile Network Code
+
+nci: '0x000000010'   # NR Cell Identity (36-bit)
+idLength: 32          # NR gNB ID length in bits [22...32]
+tac: 1                # Tracking Area Code
+
+linkIp: 192.168.200.130   # IP pour la simulation radio (UE <-> gNB)
+ngapIp: 192.168.200.130   # IP pour l'interface N2 (gNB <-> AMF)
+gtpIp: 192.168.200.130    # IP pour l'interface N3 (gNB <-> UPF)
+
+# Adresse de l'AMF (VM CP)
+amfConfigs:
+  - address: 192.168.200.128
+    port: 38412
+
+# Slices supportés
+slices:
+  - sst: 1
+
+ignoreStreamIds: true
+cellAccessType: nr
